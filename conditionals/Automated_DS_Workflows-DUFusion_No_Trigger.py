@@ -47,7 +47,7 @@ def get_medium_type_disk(disk_id):
     except Exception:
         return {}
 
-if 'iMac' in get_model_identifier() or 'Macmini' in get_model_identiefier():
+if 'iMac' in get_model_identifier() or 'Macmini' in get_model_identifier():
     print "Fusion Drive may be possible on this model."
     if get_medium_type_disk(0) is True:
         print "SSD detected on disk0 - continuing check"
