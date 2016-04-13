@@ -16,6 +16,7 @@ import os
           Version:  1.0
 """
 
+
 def get_model_identifier():
     # Uses system_profiler to find the model identifier of the machine.
     cmd = ['/usr/sbin/system_profiler', '-xml', 'SPHardwareDataType']
@@ -30,6 +31,7 @@ def get_model_identifier():
         return sp_model_identifier
     except Exception:
         return {}
+
 
 def get_medium_type_disk(disk_id):
     # Uses diskutil to process whether a physical disk is a SolidState or not.
@@ -48,23 +50,29 @@ def get_medium_type_disk(disk_id):
         return {}
 
 if 'iMac' in get_model_identifier() or 'Macmini' in get_model_identifier():
-    print "Fusion Drive may be possible on this model."
+    print "Fusion Drive may be possible for this model."
     if get_medium_type_disk(0) is True:
         print "SSD detected on disk0 - continuing check"
         if get_medium_type_disk(1) is False:
-			print "HDD detected on disk1. Assuming Fusion Drive"
-			isfusion = "1"
+            print "HDD detected on disk1. Assuming Fusion Drive"
+            isfusion = "1"
         else:
-			print "No HDD detected on disk1. This Mac does not have a Fusion Drive."
-			isfusion = "0"
+            print "No HDD detected on disk1. This Mac does not have a Fusion Drive."
+            isfusion = "0"
     else:
-        print "This Mac does not have a Fusion Drive."
-        isfusion = "0"
+        if get_medium_type_disk(1) is True:
+            print "SSD detected on disk1 - continuing check"
+            if get_medium_type_disk(0) is False:
+                print "HDD detected on disk0. Assuming Fusion Drive"
+                isfusion = "1"
+        else:
+            print "No HDD detected on disk1. This Mac does not have a Fusion Drive."
+            isfusion = "0"
 else:
-	print "This machine is not a Fusion Drive model"
-	isfusion = "0"
+    print "This Mac is not a Fusion Drive model"
+    isfusion = "0"
 
 if "0" in isfusion:
-	print "RuntimeSelectWorkflow: Yosemite"
+    print "RuntimeSelectWorkflow: Yosemite"
 if "1" in isfusion:
-	print "RuntimeSelectWorkflow: Yosemite-Fusion_Drive"
+    print "RuntimeSelectWorkflow: Yosemite-Fusion_Drive"
