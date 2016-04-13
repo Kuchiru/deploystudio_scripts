@@ -18,16 +18,15 @@ import os
 
 
 def get_model_identifier():
-    # Uses system_profiler to find the model identifier of the machine.
-    cmd = ['/usr/sbin/system_profiler', '-xml', 'SPHardwareDataType']
+    # Uses sysctl to find the model identifier of the machine.
+    cmd = ['/usr/sbin/sysctl', 'hw.model']
     proc = subprocess.Popen(cmd, shell=False, bufsize=-1,
                             stdin=subprocess.PIPE,
                             stdout=subprocess.PIPE,
                             stderr=subprocess.PIPE)
     output, err = proc.communicate()
     try:
-        plist = plistlib.readPlistFromString(output)
-        sp_model_identifier = plist[0]['_items'][0]['machine_model']
+        sp_model_identifier = output[10:]
         return sp_model_identifier
     except Exception:
         return {}
