@@ -57,7 +57,7 @@ if get_medium_type_disk(0) is True and get_medium_type_disk(1) is False or get_m
         if 'iMac' in get_model_identifier() or 'Macmini' in get_model_identifier():
             print "Fusion drive detected, running fusion drive workflow"
             storage = "0"
-            # Runs when a fusion drive is detected on 10.13
+            # Runs when a fusion drive is detected on a booted 10.13
         else:
             if get_medium_type_disk(0) is True:
                 print "Multiple storage volumes detected but device is not a valid model, SSD installed on disk0 assuming SSD workflow"
@@ -72,16 +72,16 @@ if get_medium_type_disk(0) is True and get_medium_type_disk(1) is False or get_m
         if 'iMac' in get_model_identifier() or 'Macmini' in get_model_identifier():
             print "Fusion drive detected, running fusion drive workflow"
             storage = "4"
-            # Runs when a fusion drive is detected on an OS lower than 10.13
+            # Runs when a fusion drive is detected on an booted OS lower than 10.13
         else:
             if get_medium_type_disk(0) is True:
                 print "Multiple storage volumes detected but device is not a valid model, SSD installed on disk0 assuming SSD workflow"
                 storage = "3"
-                # Runs SSD workflow when multiple volumes are detected but the unit has not been identified as a model that has a Fusion drive, only on OS lower than 10.13.
+                # Runs SSD workflow when multiple volumes are detected but the unit has not been identified as a model that has a Fusion drive, only on booted OS lower than 10.13.
             else:
                 print "Multiple storage volumes detected but device is not a valid model, HDD installed on disk0 assuming HDD workflow"
                 storage = "2"
-                # Runs SSD workflow when multiple volumes are detected but the unit has not been identified as a model that has a Fusion drive, only on OS lower than 10.13.
+                # Runs SSD workflow when multiple volumes are detected but the unit has not been identified as a model that has a Fusion drive, only on booted OS lower than 10.13.
 elif get_medium_type_disk(0) is True:
     if get_software_version() == '10.13':
         print "SSD detected on disk0, assuming SSD workflow"
