@@ -88,9 +88,9 @@ else:
     storage = "5"
 
 if "0" in storage:
-	print "RuntimeSelectWorkflow: Fusion"
+    print "RuntimeSelectWorkflow: Fusion"
 if "1" in storage:
-	print "RuntimeSelectWorkflow: SSD"
+    print "RuntimeSelectWorkflow: SSD"
 if "2" in storage:
     print "RuntimeSelectWorkflow: HDD"
 if "3" in storage:
