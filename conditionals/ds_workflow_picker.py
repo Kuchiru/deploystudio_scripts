@@ -50,6 +50,7 @@ def get_model_identifier():
 
 # Fusion drive detection has been prepared for future APFS support, edit the "storage" value to correspond with the workflow you want to run.
 # See the bottom of the script which values will result in which workflow, do not forget to rename the workflow names to correspond with your own.
+# When using this script be sure to enable python in your netboot environment.
 
 if get_medium_type_disk(0) is True and get_medium_type_disk(1) is False or get_medium_type_disk(1) is True and get_medium_type_disk(0) is False:
     if get_software_version() == '10.13':
@@ -62,11 +63,11 @@ if get_medium_type_disk(0) is True and get_medium_type_disk(1) is False or get_m
             if get_medium_type_disk(0) is True:
                 print "Multiple storage volumes detected but device is not a valid model, SSD installed on disk0 assuming SSD workflow"
                 storage = "1"
-                # Runs SSD workflow when multiple volumes are detected but the unit has not been identified as a model that has a Fusion drive.
+                # Runs SSD workflow when multiple volumes are detected but the unit has not been identified as a model that has a Fusion drive, only runs on booted OS 10.13.
             else:
                 print "Multiple storage volumes detected but device is not a valid model, HDD installed on disk0 assuming HDD workflow"
                 storage = "2"
-                # Runs HDD workflow when multiple volumes are detected but the unit has not been identified as a model that has a Fusion drive.
+                # Runs HDD workflow when multiple volumes are detected but the unit has not been identified as a model that has a Fusion drive, only runs on booted OS 10.13.
     else:
         print "Booted OS is %s, APFS restores will not be possible" % get_software_version()
         if 'iMac' in get_model_identifier() or 'Macmini' in get_model_identifier():
