@@ -82,7 +82,7 @@ if get_medium_type_disk(0) is True and get_medium_type_disk(1) is False or get_m
             else:
                 print "Multiple storage volumes detected but device is not a valid model, HDD installed on disk0 assuming HDD workflow"
                 storage = "2"
-                # Runs SSD workflow when multiple volumes are detected but the unit has not been identified as a model that has a Fusion drive, only on booted OS lower than 10.13.
+                # Runs HDD workflow when multiple volumes are detected but the unit has not been identified as a model that has a Fusion drive, only on booted OS lower than 10.13.
 elif get_medium_type_disk(0) is True:
     if get_software_version() == '10.13':
         print "SSD detected on disk0, assuming SSD workflow"
