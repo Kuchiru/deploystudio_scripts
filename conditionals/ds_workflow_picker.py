@@ -54,44 +54,45 @@ def get_model_identifier():
 
 if get_medium_type_disk(0) is True and get_medium_type_disk(1) is False or get_medium_type_disk(1) is True and get_medium_type_disk(0) is False:
     if get_software_version() == '10.13':
-        print "Booted OS is %s" % get_software_version()
+        print "netbooted OS is %s" % get_software_version()
         if 'iMac' in get_model_identifier() or 'Macmini' in get_model_identifier():
             print "Fusion drive detected, running fusion drive workflow"
             storage = "0"
-            # Runs when a fusion drive is detected on a booted 10.13
+            # Runs when a fusion drive is detected on a netbooted 10.13
         else:
             if get_medium_type_disk(0) is True:
                 print "Multiple storage volumes detected but device is not a valid model, SSD installed on disk0 assuming SSD workflow"
                 storage = "1"
-                # Runs SSD workflow when multiple volumes are detected but the unit has not been identified as a model that has a Fusion drive, only runs on booted OS 10.13.
+                # Runs SSD workflow when multiple volumes are detected but the unit has not been identified as a model that has a Fusion drive, only runs on netbooted OS 10.13.
             else:
                 print "Multiple storage volumes detected but device is not a valid model, HDD installed on disk0 assuming HDD workflow"
                 storage = "2"
-                # Runs HDD workflow when multiple volumes are detected but the unit has not been identified as a model that has a Fusion drive, only runs on booted OS 10.13.
+                # Runs HDD workflow when multiple volumes are detected but the unit has not been identified as a model that has a Fusion drive, only runs on netbooted OS 10.13.
     else:
-        print "Booted OS is %s, APFS restores will not be possible" % get_software_version()
+        print "netbooted OS is %s, APFS restores will not be possible" % get_software_version()
         if 'iMac' in get_model_identifier() or 'Macmini' in get_model_identifier():
             print "Fusion drive detected, running fusion drive workflow"
             storage = "4"
-            # Runs when a fusion drive is detected on an booted OS lower than 10.13
+            # Runs when a fusion drive is detected on an netbooted OS lower than 10.13
         else:
             if get_medium_type_disk(0) is True:
                 print "Multiple storage volumes detected but device is not a valid model, SSD installed on disk0 assuming SSD workflow"
                 storage = "3"
-                # Runs SSD workflow when multiple volumes are detected but the unit has not been identified as a model that has a Fusion drive, only on booted OS lower than 10.13.
+                # Runs SSD workflow when multiple volumes are detected but the unit has not been identified as a model that has a Fusion drive, only on netbooted OS lower than 10.13.
             else:
                 print "Multiple storage volumes detected but device is not a valid model, HDD installed on disk0 assuming HDD workflow"
                 storage = "2"
-                # Runs HDD workflow when multiple volumes are detected but the unit has not been identified as a model that has a Fusion drive, only on booted OS lower than 10.13.
+                # Runs HDD workflow when multiple volumes are detected but the unit has not been identified as a model that has a Fusion drive, only on netbooted OS lower than 10.13.
 elif get_medium_type_disk(0) is True:
     if get_software_version() == '10.13':
+        print "netbooted OS is %s" % get_software_version()
         print "SSD detected on disk0, assuming SSD workflow"
         storage = "1"
         # Runs SSD workflow, only when 10.13 is detected.
     else:
         print "SSD detected on disk0 but not running APFS compatible OS, HFS SSD workflow"
         storage = "3"
-        # Runs SSD workflow, only when booted OS is a lower version than 10.13.
+        # Runs SSD workflow, only when netbooted OS is a lower version than 10.13.
 elif get_medium_type_disk(0) is False:
     print "HDD detected on disk0, assuming HDD workflow"
     storage = "2"
