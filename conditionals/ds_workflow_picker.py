@@ -101,9 +101,9 @@ else:
     # Will direct to warning workflow to notify that there is no storage volume present.
 
 if "0" in storage:
-	print "RuntimeSelectWorkflow: Fusion"
+    print "RuntimeSelectWorkflow: Fusion"
 if "1" in storage:
-	print "RuntimeSelectWorkflow: SSD"
+    print "RuntimeSelectWorkflow: SSD"
 if "2" in storage:
     print "RuntimeSelectWorkflow: HDD"
 if "3" in storage:
