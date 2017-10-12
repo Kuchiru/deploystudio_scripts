@@ -106,9 +106,14 @@ elif get_medium_type_disk(0) is True:
         storage = "1"
         # Runs SSD workflow, only when 10.13 is detected.
     else:
-        print "SSD detected on disk0 but not running APFS compatible OS, HFS SSD workflow"
-        storage = "3"
-        # Runs SSD workflow, only when netbooted OS is a lower version than 10.13.
+        if detect_apfs_container() is False:
+            print "SSD detected on disk0 but not running APFS compatible OS, HFS SSD workflow"
+            storage = "3"
+            # Runs SSD workflow, only when netbooted OS is a lower version than 10.13.
+        else:
+            print "APFS container detected, repartitioning not possible in 10.12"
+            storage = "6"
+            # Either redirect to workflow that can destroy APFS containers to restore 10.12 or warning workflow.
 elif get_medium_type_disk(0) is False:
     print "HDD detected on disk0, assuming HDD workflow"
     storage = "2"
