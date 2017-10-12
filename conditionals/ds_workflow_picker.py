@@ -19,6 +19,7 @@ def get_medium_type_disk(disk_id):
         return sp_medium_type
     except Exception:
         return {}
+
 def detect_apfs_container():
     # Uses diskutil to determine if APFS is used or not.
     cmd = ['/usr/sbin/diskutil', 'apfs', 'list', '-plist']
@@ -135,3 +136,5 @@ if "4" in storage:
     print "RuntimeSelectWorkflow: Fusion-ALT"
 if "5" in storage:
     print "RuntimeSelectWorkflow: Storage-Warning"
+if "6" in storage:
+    print "RuntimeSelectWorkflow: APFS-Warning"
