@@ -19,6 +19,22 @@ def get_medium_type_disk(disk_id):
         return sp_medium_type
     except Exception:
         return {}
+def detect_apfs_container():
+    # Uses diskutil to determine if APFS is used or not.
+    cmd = ['/usr/sbin/diskutil', 'apfs', 'list', '-plist']
+    proc = subprocess.Popen(cmd, shell=False, bufsize=-1,
+                            stdin=subprocess.PIPE,
+                            stdout=subprocess.PIPE,
+                            stderr=subprocess.PIPE)
+    output, err = proc.communicate()
+    try:
+        plist = plistlib.readPlistFromString(output)
+        array = plist.get('Containers')
+        apfs_dict = array[0]
+        apfs_marker = apfs_dict.get('APFSContainerUUID')
+        return apfs_marker
+    except Exception:
+        return False
 
 def get_software_version():
     # Fetch running software version, for APFS compatibility purposes.
