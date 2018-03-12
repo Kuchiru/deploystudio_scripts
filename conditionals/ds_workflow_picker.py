@@ -51,20 +51,19 @@ def get_software_version():
     except Exception:
         return {}
 
-# can be used to get the model identifier for deeper logic in the workflow selection, currently unused.
-#def get_model_identifier():
-#    # Uses sysctl to find the model identifier of the machine.
-#    cmd = ['/usr/sbin/sysctl', 'hw.model']
-#    proc = subprocess.Popen(cmd, shell=False, bufsize=-1,
-#                            stdin=subprocess.PIPE,
-#                            stdout=subprocess.PIPE,
-#                            stderr=subprocess.PIPE)
-#    output, err = proc.communicate()
-#    try:
-#        sp_model_identifier = output[10:]
-#        return sp_model_identifier
-#    except Exception:
-#        return {}
+def get_model_identifier():
+    # Uses sysctl to find the model identifier of the machine.
+    cmd = ['/usr/sbin/sysctl', 'hw.model']
+    proc = subprocess.Popen(cmd, shell=False, bufsize=-1,
+                            stdin=subprocess.PIPE,
+                            stdout=subprocess.PIPE,
+                            stderr=subprocess.PIPE)
+    output, err = proc.communicate()
+    try:
+        sp_model_identifier = output[10:]
+        return sp_model_identifier
+    except Exception:
+        return {}
 
 # Fusion drive detection has been prepared for future APFS support, edit the "storage" value to correspond with the workflow you want to run.
 # See the bottom of the script which values will result in which workflow, do not forget to rename the workflow names to correspond with your own.
