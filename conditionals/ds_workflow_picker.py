@@ -122,7 +122,7 @@ elif get_medium_type_disk(0) is False:
 else:
     print "Possible issue with storage medium detected, redirecting to warning workflow"
     storage = "5"
-    # Will direct to warning workflow to notify that there is no storage volume present.
+    # Will direct to warning workflow to notify that there was no physical storage volume detected.
 
 if "0" in storage:
     print "RuntimeSelectWorkflow: Fusion"
